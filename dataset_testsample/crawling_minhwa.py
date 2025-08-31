@@ -201,7 +201,7 @@ def download_images(folder_name, search_url, num_images, mode="thumbnail"):
     else:
         print("Invalid mode:", mode)
 
-    print(f"✅ [{folder_name}] saved {saved} images ({mode}) → {directory}")
+    print(f"[{folder_name}] saved {saved} images ({mode}) → {directory}")
     driver.quit()
 
 # ---------- 실행 ----------

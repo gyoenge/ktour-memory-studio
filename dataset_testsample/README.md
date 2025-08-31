@@ -14,8 +14,6 @@ MacOS 환경에서 실행하기 위해 필요한 설정 및 실행 방법을 설
   python3 -m pip install selenium beautifulsoup4 requests
   ```
 
----
-
 ## 2. Chrome 및 ChromeDriver 설치
 
 ### ① Chrome 설치
@@ -46,7 +44,6 @@ MacOS 환경에서 실행하기 위해 필요한 설정 및 실행 방법을 설
   * 처음 실행 시 *“보안 때문에 열 수 없음”* 메시지가 나올 수 있습니다.
   * `시스템 설정 → 개인정보 보호 및 보안 → 보안 → 열기 허용` 클릭 후 재실행.
 
----
 
 ## 3. 코드 설정 수정
 
@@ -58,7 +55,6 @@ MacOS 환경에서 실행하기 위해 필요한 설정 및 실행 방법을 설
 CHROMEDRIVER_PATH = "/opt/homebrew/bin/chromedriver"
 ```
 
----
 
 ## 4. 실행 방법
 
@@ -77,7 +73,6 @@ CHROMEDRIVER_PATH = "/opt/homebrew/bin/chromedriver"
    ...
    ```
 
----
 
 ## 5. 주요 옵션
 
@@ -89,7 +84,6 @@ CHROMEDRIVER_PATH = "/opt/homebrew/bin/chromedriver"
   `True` → 브라우저 창 없이 백그라운드 실행
   `False` → 실제 크롬 창이 뜨면서 진행 (처음엔 False 권장)
 
----
 
 ## 6. 유의 사항
 
@@ -99,4 +93,3 @@ CHROMEDRIVER_PATH = "/opt/homebrew/bin/chromedriver"
 * 실행 후 Chrome이 열리면, 주기적으로 '이미지 더보기' 버튼을 클릭해줘야할 수 있습니다. 
 * 크롤링된 이미지에 노이즈가 있을 수 있습니다. 원하는 이미지들을 필터링하여 사용하세요. 
 
----
