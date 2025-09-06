@@ -1,35 +1,105 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+
+import KioskLayout from './components/studio/KioskLayout';
+import PhotoSelectionScreen from './screens/PhotoSelectionScreen';
+import CustomizationScreen from './screens/CustomizationScreen';
+import LoadingScreen from './screens/LoadingScreen';
+import ResultScreen from './screens/ResultScreen';
+
+import { GlobalStyle } from './styles/GlobalStyle';
+import { theme } from './styles/theme';
+import type { AppStep, UserSelections } from './types';
+import IntroScreen from './screens/IntroScreen';
+import { AnimatePresence, motion } from 'framer-motion';
+
+// const screenVariants = {
+//   initial: { opacity: 0 },
+//   animate: { opacity: 1 },
+//   exit: { opacity: 0 },
+//   transition: { duration: 1 }
+// };
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [step, setStep] = useState<AppStep>('INTRO');
+  const [selections, setSelections] = useState<UserSelections>({
+    photo: null,
+    background: null,
+    elements: [],
+  });
+
+  const handleIntroNext = () => setStep('PHOTO_SELECTION'); 
+
+  const handlePhotoSelect = (photo: string) => {
+    setSelections(prev => ({ ...prev, photo }));
+    setStep('CUSTOMIZATION');
+  };
+
+  const handleCustomization = (background: string, elements: string[]) => {
+    setSelections(prev => ({ ...prev, background, elements }));
+    setStep('LOADING');
+  };
+
+  const handleLoadingFinish = () => {
+    setStep('RESULT');
+  };
+
+  const handleRestart = () => {
+    setSelections({ photo: null, background: null, elements: [] });
+    setStep('INTRO');
+  };
+
+  const renderCurrentScreen = () => {
+    switch (step) {
+      case 'INTRO':
+        return (
+          // <motion.div key="INTRO" {...screenVariants}>
+            <IntroScreen onNext={handleIntroNext} />
+          // </motion.div>
+        );
+      case 'PHOTO_SELECTION':
+        return (
+          // <motion.div key="PHOTO_SELECTION" {...screenVariants}>
+            <PhotoSelectionScreen onNext={handlePhotoSelect} />
+          // </motion.div>
+        );
+      case 'CUSTOMIZATION':
+        return (
+          // <motion.div key="CUSTOMIZATION" {...screenVariants}>
+            <CustomizationScreen onNext={handleCustomization} />
+          // </motion.div>
+        );
+      case 'LOADING':
+        return (
+          // <motion.div key="LOADING" {...screenVariants}>
+            <LoadingScreen onFinished={handleLoadingFinish} />
+          // </motion.div>
+        );
+      case 'RESULT':
+        return (
+          // <motion.div key="RESULT" {...screenVariants}>
+            <ResultScreen selections={selections} onRestart={handleRestart} />
+          // </motion.div>
+        );
+      default:
+        return (
+          // <motion.div key="default" {...screenVariants}>
+            <IntroScreen onNext={handleIntroNext} />
+          // </motion.div>
+        );
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <KioskLayout>
+        <AnimatePresence>
+          {renderCurrentScreen()}
+        </AnimatePresence>
+      </KioskLayout>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
