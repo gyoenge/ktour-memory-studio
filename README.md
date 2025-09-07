@@ -1,5 +1,8 @@
-# ktour-memory-studio
+# K-Tour Memory Studio 
+## AI Data Utilization Service Contest
 
-**2025 공유마당 인공지능 원천데이터 활용 공모전 공모작**
+- Event: 2025 Gongu AI Data Utilization Contest (August-September 2025)
+- Theme: Prototyping an AI service using Gongu-madang(공유마당)’s source datasets. 
+- Idea: **generative AI service** that **creates personalized souvenirs** (postcards, photo cards, posters, etc.) **using elements of Korean tradition**.
+- Individual Participation
 
-: 한국 전통 요소들을 활용해 맞춤형 기념품(엽서/포토카드/포스터 등)을 제작해주는 생성형AI 서비스
